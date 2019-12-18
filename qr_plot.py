@@ -1,5 +1,6 @@
 import csv
 import os
+import sys
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -71,6 +72,13 @@ def qr_plot(csv_file_path):
 
 
 if __name__ == '__main__':
-    _dir_path = os.path.dirname(__file__)
-    _csv_file_path = os.path.join(_dir_path, 'name_string.csv')
+    if len(sys.argv) < 2:
+        print('Type \"python %s <csv file path>\"' % os.path.basename(sys.argv[0]))
+        sys.exit()
+
+    _csv_file_path = sys.argv[1]
+    if not os.path.exists(_csv_file_path):
+        print('%s file is not existed' % _csv_file_path)
+        sys.exit()
+
     qr_plot(_csv_file_path)
